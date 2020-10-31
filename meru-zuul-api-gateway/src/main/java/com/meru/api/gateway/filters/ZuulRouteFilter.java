@@ -1,7 +1,10 @@
 package com.meru.api.gateway.filters;
+import org.springframework.stereotype.Component;
+
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.exception.ZuulException;
 
+@Component
 public class ZuulRouteFilter extends ZuulFilter{
 
 	@Override

@@ -10,7 +10,7 @@ public class ZullErrorFilter extends ZuulFilter {
 	@Override
 	public boolean shouldFilter() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
