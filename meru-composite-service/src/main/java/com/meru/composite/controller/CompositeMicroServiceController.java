@@ -142,6 +142,23 @@ public class CompositeMicroServiceController {
 		return inventoryServiceProxy.findInventoryOfProduct(productId);
 	}
 	
+	@GetMapping("/placeorder/{cartId}")
+	public String placeOrder(@PathVariable int cartId) {
+		Cart cart = cartServiceProxy.getCartByID(cartId);
+		List<CartDetails> listOfCartItems = cartServiceProxy.getCartDetailsOfId(cartId);
+		for(CartDetails cartDetails : listOfCartItems) {
+			Inventory productInventory = inventoryServiceProxy.findInventoryOfProduct(cartDetails.getProductId().getId());
+			productInventory.setAvailableInventory(productInventory.getAvailableInventory()-cartDetails.getQuantity());
+			inventoryServiceProxy.createOrUpdateInventory(productInventory);			
+		}			
+		
+		OrderStatus orderStatus = new OrderStatus();
+		orderStatus.setOrderStatus("Confirmed With COD");
+		orderStatus.setCartId(cart);		
+		orderServiceProxy.creatOrUpdateOrderDetails(orderStatus);
+		
+		return null;
+	}
 	
 		
 }

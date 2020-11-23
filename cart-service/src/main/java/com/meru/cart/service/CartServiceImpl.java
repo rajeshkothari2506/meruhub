@@ -1,5 +1,8 @@
 package com.meru.cart.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +31,19 @@ public class CartServiceImpl implements CartService {
 	public CartDetails addItemToCart(CartDetails cartService) {
 		CartDetails cartDetails = cartDetailsRepository.save(cartService);	
 		return cartDetails;
+	}
+
+	@Override
+	public Cart findCartById(int cartId) {
+		// TODO Auto-generated method stub
+		return cartRepo.findById(cartId).get();
+	}
+
+	@Override
+	public List<CartDetails> getAllCartDetails(Cart cart) {
+		// TODO Auto-generated method stub
+		return cartDetailsRepository.findByCartId(cart);
+				
 	}
 
 }

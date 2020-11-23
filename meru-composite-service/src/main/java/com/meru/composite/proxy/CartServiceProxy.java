@@ -1,7 +1,10 @@
 package com.meru.composite.proxy;
 
+import java.util.List;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -18,6 +21,9 @@ public interface CartServiceProxy {
 	@PostMapping("/addtocart")
 	public int addItemToCart(@RequestBody CartDetails cartDetails);
 	
-	@GetMapping("/hello")
-	public String hello();
+	@GetMapping("/getcartbyid/{cartId}")
+	public Cart getCartByID(@PathVariable int cartId);
+	
+	@GetMapping("/getcartdetails/{cartId}")
+	public List<CartDetails> getCartDetailsOfId(@PathVariable int cartId); 
 }

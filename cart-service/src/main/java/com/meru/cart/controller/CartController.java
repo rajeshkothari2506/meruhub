@@ -1,7 +1,10 @@
 package com.meru.cart.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,5 +36,15 @@ public class CartController {
 		CartDetails cart = cartService.addItemToCart(cartDetails);
 		return cart.getId();
 		
+	}
+	
+	@GetMapping("/getcartbyid/{cartId}")
+	public Cart getCartByID(@PathVariable int cartId) {
+		return cartService.findCartById(cartId);
+	}
+	
+	@GetMapping("/getcartdetails/{cartId}")
+	public List<CartDetails> getCartDetailsOfId(@PathVariable int cartId) {
+		return cartService.getAllCartDetails(cartService.findCartById(cartId));
 	}
 }
